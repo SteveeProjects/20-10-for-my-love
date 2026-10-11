@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html lang="vi" class="locked">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FFF8F5" />
+<meta name="description" content="A little something for you." />
+<title>20 / 10 — Anh cóa 1 món quà nhỏ cho thúi nè</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌷%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   0. TOKENS
+   ============================================================ */
+:root{
+  --bg:        #FFF8F5;
+  --bg-2:      #FDF2EF;
+  --paper:     #FFFCFA;
+  --surface:   #FFFFFF;
+  --ink:       #241721;
+  --ink-2:     #57424E;
+  --muted:     #9C8993;
+  --line:      #F1E1E3;
+  --line-2:    #E3CDD2;
+  --accent:    #D95E7A;
+  --accent-2:  #FBE4EA;
+  --accent-3:  #8E2B45;
+  --blush:     #F7D0D9;
+  --leaf:      #86A892;
+
+  --shadow-sm: 0 1px 2px rgba(142,43,69,.04);
+  --shadow-md: 0 24px 48px -32px rgba(142,43,69,.35);
+  --shadow-lg: 0 34px 64px -38px rgba(217,94,122,.5);
+  --shadow-xl: 0 60px 100px -60px rgba(80,20,40,.45);
+
+  --maxw:      640px;
+
+  --sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+}
+
+/* ============================================================
+   1. RESET / BASE
+   ============================================================ */
+*, *::before, *::after{ box-sizing: border-box; }
+html{ -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html.locked, body.locked{ overflow: hidden; overscroll-behavior: none; }
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, svg{ max-width: 100%; display: block; }
+button{ font: inherit; color: inherit; }
+::selection{ background: var(--accent-2); color: var(--accent-3); }
+
+.petal-layer{
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+.petal-layer.back{
+  filter: blur(1.1px);
+  opacity: .85;
+}
+
+/* ============================================================
+   2. ENVELOPE INTRO
+   ============================================================ */
+.env-overlay{
+  position: fixed; inset: 0; z-index: 90;
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px 22px calc(60px + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  background: radial-gradient(70% 52% at 50% 34%, #FFE8EE 0%, transparent 70%), var(--bg);
+  transition: opacity .9s cubic-bezier(.4,0,.2,1), visibility .9s cubic-bezier(.4,0,.2,1);
+}
+.env-overlay.hidden{ opacity: 0; visibility: hidden; pointer-events: none; }
+
+.env-stage{
+  width: 100%; max-width: 420px; margin: auto;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  position: relative;
+}
+.env-title{
+  margin: 0 0 6px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(20px, 5.6vw, 26px); line-height: 1.35;
+  letter-spacing: -.01em; color: var(--ink);
+  position: relative; z-index: 1;
+}
+.env-sub{
+  margin: 0 0 72px; font-size: 13px; letter-spacing: .16em; color: var(--muted);
+  position: relative; z-index: 1;
+}
+
+.envelope{
+  position: relative;
+  width: min(280px, 76vw);
+  aspect-ratio: 3 / 2;
+  margin-bottom: 42px;
+  perspective: 1200px;
+  z-index: 2;
+}
+.env-back, .env-letter, .env-front, .env-flap{ position: absolute; inset: 0; }
+
+.env-back{
+  background: linear-gradient(180deg, #F7E1E6 0%, #EFCFD6 100%);
+  border-radius: 6px;
+  box-shadow: 0 12px 30px -18px rgba(142,43,69,.5), inset 0 0 0 1px rgba(255,255,255,.4);
+}
+
+.env-letter{
+  left: 8%; right: 8%; top: 10%; bottom: 10%;
+  background: var(--paper); border-radius: 3px;
+  box-shadow: 0 4px 10px -6px rgba(80,20,40,.35);
+  transform: translateY(0);
+  transition: transform 1s cubic-bezier(.3,.8,.2,1) .35s;
+  z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-3); font-family: var(--serif); font-style: italic; font-size: 14px;
+  overflow: hidden;
+}
+.env-letter::before{
+  content: ""; position: absolute; inset: 10px;
+  border: 1px dashed rgba(217,94,122,.35); border-radius: 2px; pointer-events: none;
+}
+.envelope.open .env-letter{ transform: translateY(-46%); }
+
+.env-front{
+  z-index: 3; pointer-events: none;
+  background: linear-gradient(135deg, #F3D2DA 0%, #E9B8C3 100%);
+  border-radius: 6px;
+  clip-path: polygon(0% 100%, 0% 0%, 12% 0%, 50% 44%, 88% 0%, 100% 0%, 100% 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+.env-front::after{
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(45deg,  transparent 49.5%, rgba(255,255,255,.18) 50%, transparent 50.5%),
+    linear-gradient(-45deg, transparent 49.5%, rgba(255,255,255,.18) 50%, transparent 50.5%);
+  clip-path: polygon(0 100%, 0 0, 50% 44%, 100% 0, 100% 100%);
+}
+.env-flap{
+  z-index: 4;
+  background: linear-gradient(180deg, #E9B8C3 0%, #DEA4B1 100%);
+  border-radius: 6px 6px 2px 2px;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 60%);
+  transform-origin: top center; transform: rotateX(0deg);
+  transition: transform .95s cubic-bezier(.4,.1,.2,1), z-index 0s linear .5s, opacity .5s ease .5s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 6px 12px -8px rgba(80,20,40,.3);
+}
+.envelope.open .env-flap{ transform: rotateX(-178deg); z-index: 1; opacity: .75; }
+
+/* NEW: Glow ring sau phong bì khi mở */
+.env-glow{
+  position: absolute;
+  inset: -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217,94,122,.42) 0%, rgba(247,208,217,.25) 30%, transparent 62%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  transform: scale(0.5);
+  transition: opacity .8s ease, transform 1.4s cubic-bezier(.2,.8,.2,1);
+}
+.envelope.open .env-glow{
+  opacity: 1;
+  transform: scale(1.15);
+  animation: envGlowPulse 2.2s ease-out .4s;
+}
+@keyframes envGlowPulse{
+  0%  { opacity: 0; transform: scale(0.6); }
+  35% { opacity: 1; transform: scale(1.05); }
+  100%{ opacity: .5; transform: scale(1.28); }
+}
+
+/* NEW: Particles bay ra */
+.env-particles{
+  position: absolute;
+  left: 50%; top: 5%;
+  width: 0; height: 0;
+  z-index: 6;
+  pointer-events: none;
+  overflow: visible;
+}
+.env-particles span{
+  position: absolute;
+  left: 0; top: 0;
+  width: 10px; height: 10px;
+  background: var(--c, #F7D0D9);
+  border-radius: 50% 0 50% 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+  transform-origin: center;
+  animation: envPetalFly 1.7s cubic-bezier(.15,.7,.3,1) forwards;
+  animation-delay: calc(var(--d, 0s) + 1.15s);
+  animation-play-state: paused;
+  box-shadow: 0 1px 2px rgba(142,43,69,.15);
+}
+.envelope.open .env-particles span{
+  animation-play-state: running;
+}
+@keyframes envPetalFly{
+  0%{
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--r)) translate(0, 0) scale(0.3);
+  }
+  15%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(calc(var(--r) + 180deg))
+               translate(var(--x, 0), var(--y, -80px)) scale(1);
+  }
+}
+
+.env-actions{
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px;
+  position: relative; z-index: 1;
+}
+.env-btn{
+  min-height: 48px; padding: 13px 32px; border: 0; border-radius: 999px;
+  font-size: 14px; font-weight: 500; letter-spacing: .03em; cursor: pointer;
+  transition: transform .2s ease, box-shadow .35s ease, background .3s ease, color .3s ease, opacity .3s ease;
+}
+.env-btn:active{ transform: scale(.96); }
+.env-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 4px; }
+.env-btn-primary{
+  background: var(--ink); color: #FFF8F5;
+  box-shadow: 0 16px 30px -18px rgba(36,23,33,.7);
+}
+.env-btn-primary:hover{ background: var(--accent-3); box-shadow: 0 20px 34px -16px rgba(142,43,69,.6); }
+.env-btn-ghost{
+  background: transparent; color: var(--muted); font-weight: 400; padding: 13px 20px;
+}
+.env-btn-ghost:hover{ color: var(--ink); }
+.env-overlay.opening .env-actions{
+  opacity: 0; transform: translateY(6px); pointer-events: none;
+  transition: opacity .4s ease, transform .4s ease;
+}
+.env-foot{
+  position: absolute; bottom: calc(env(safe-area-inset-bottom, 0px) + 22px); margin: 0;
+  font-size: 12px; letter-spacing: .08em; color: var(--muted); opacity: .8;
+}
+
+/* ============================================================
+   3. PROGRESS BAR
+   ============================================================ */
+.progress{
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 70;
+  pointer-events: none; opacity: 0; transition: opacity .5s ease;
+}
+.progress.show{ opacity: 1; }
+.progress-bar{
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--blush), var(--accent));
+  transition: width .12s linear;
+}
+
+/* ============================================================
+   4. MUSIC UI
+   ============================================================ */
+.music-ui{
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 12px); right: 12px; z-index: 80;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  opacity: 0; pointer-events: none; transform: translateY(-6px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.music-ui.show{ opacity: 1; pointer-events: auto; transform: none; }
+.music-btn{
+  display: inline-flex; align-items: center; gap: 7px;
+  min-height: 40px; padding: 9px 15px;
+  background: rgba(255,255,255,.82);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid var(--line); border-radius: 999px;
+  font-size: 12.5px; color: var(--ink-2); cursor: pointer;
+  transition: color .3s ease, border-color .3s ease, opacity .3s ease, transform .2s ease;
+}
+.music-btn:active{ transform: scale(.96); }
+.music-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+.music-btn .m-ico{ font-size: 13px; line-height: 1; }
+.music-btn.on{ color: var(--accent); border-color: #F0C9D3; }
+.music-btn.on .m-ico{ animation: pulse 1.7s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{ opacity: 1; } 50%{ opacity: .4; } }
+.music-note{ display: none; padding-right: 4px; font-size: 11px; color: var(--muted); }
+.music-ui.unavailable{ display: none; }
+
+/* ============================================================
+   5. MAIN / LAYOUT
+   ============================================================ */
+.main{
+  position: relative; z-index: 1; opacity: 0;
+  transition: opacity 1.1s cubic-bezier(.4,0,.2,1) .05s;
+}
+.main.visible{ opacity: 1; }
+
+.container{ max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.section{ padding: 64px 0; }
+.section-tight{ padding: 40px 0; }
+.section-first{ padding-top: 40px; }
+.section-last{ padding-bottom: 32px; }
+
+.sec-head{
+  display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px;
+}
+.sec-head::after{
+  content: ""; flex: 1; height: 1px; align-self: center;
+  background: linear-gradient(90deg, var(--line-2), transparent);
+}
+.sec-num{
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 22px; line-height: 1; color: var(--accent);
+}
+.sec-title{
+  margin: 0;
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(24px, 7vw, 30px); line-height: 1.15;
+  letter-spacing: -.02em; color: var(--ink);
+}
+
+.prose p{
+  margin: 0 0 16px; font-size: 15.5px; line-height: 1.9; color: var(--ink-2);
+}
+.prose p:last-child{ margin-bottom: 0; }
+.prose p.lead{
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(22px, 6.4vw, 27px); line-height: 1.4;
+  letter-spacing: -.015em; color: var(--ink); margin-bottom: 18px;
+}
+
+/* ============================================================
+   6. HERO
+   ============================================================ */
+.hero{ position: relative; padding: calc(env(safe-area-inset-top, 0px) + 40px) 0 40px; }
+.hero-inner{
+  max-width: var(--maxw); margin: 0 auto; padding: 0 24px;
+  display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center;
+}
+.hero-text{ order: 2; }
+.hero-art{ order: 1; display: flex; justify-content: center; align-items: center; }
+
+.hero-date{ margin: 0 0 12px; font-size: 13px; letter-spacing: .14em; color: var(--muted); }
+.hero-title{
+  margin: 0 0 20px;
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(44px, 13vw, 72px); line-height: 1.02;
+  letter-spacing: -.035em; color: var(--ink);
+}
+.hero-title em{ font-style: italic; font-weight: 300; color: var(--accent); }
+.hero-greet{
+  margin: 0 0 30px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(15px, 4.4vw, 17px); line-height: 1.6;
+  color: var(--ink-2); max-width: 34ch;
+}
+.hero-cta{
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 48px; padding: 13px 28px;
+  background: var(--ink); color: #FFF8F5; border-radius: 999px;
+  font-size: 14px; font-weight: 500; letter-spacing: .03em;
+  text-decoration: none;
+  box-shadow: 0 18px 32px -18px rgba(36,23,33,.7);
+  transition: background .3s ease, transform .2s ease, box-shadow .35s ease;
+}
+.hero-cta:hover{ background: var(--accent-3); box-shadow: 0 22px 36px -16px rgba(142,43,69,.6); }
+.hero-cta:active{ transform: scale(.97); }
+.hero-cta:focus-visible{ outline: 2px solid var(--accent); outline-offset: 4px; }
+.hero-cta svg{ width: 14px; height: 14px; }
+
+.hero-scroll{
+  margin-top: 44px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  font-size: 12px; letter-spacing: .06em; color: var(--muted);
+  animation: floaty 2.8s ease-in-out infinite;
+}
+.hero-scroll svg{ width: 14px; height: 18px; }
+@keyframes floaty{ 0%,100%{ transform: translateY(0); opacity: .55; } 50%{ transform: translateY(5px); opacity: .95; } }
+
+/* ============================================================
+   7. DAY COUNTER
+   ============================================================ */
+.counter-card{
+  position: relative; padding: 44px 22px 34px; text-align: center;
+  border-radius: 30px;
+  background: radial-gradient(120% 80% at 50% 0%, #FFEEF2 0%, #FFFFFF 62%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm), var(--shadow-lg);
+  overflow: hidden; cursor: pointer;
+  -webkit-user-select: none; user-select: none;
+}
+.counter-label{ margin: 0 0 8px; font-size: 13px; color: var(--muted); }
+.counter-num{
+  margin: 0; font-family: var(--serif); font-weight: 300;
+  font-size: clamp(88px, 29vw, 132px); line-height: .95;
+  letter-spacing: -.05em; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.counter-unit{
+  margin: 6px 0 24px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 22px; color: var(--accent);
+}
+.counter-clock{
+  display: flex; justify-content: center; align-items: baseline; gap: 4px;
+  margin: 0 0 6px; color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.counter-clock b{ min-width: 2ch; text-align: right; font-size: 19px; font-weight: 500; }
+.counter-clock small{ margin-right: 10px; font-size: 12px; color: var(--muted); }
+.counter-clock small:last-child{ margin-right: 0; }
+.counter-sub{ margin: 0 0 16px; min-height: 1.4em; font-size: 13px; color: var(--ink-2); }
+.counter-note{ margin: 0; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--accent-3); }
+
+/* ============================================================
+   8. MEMORY CARD
+   ============================================================ */
+.memory-card{
+  position: relative; margin-top: 30px; padding: 44px 26px 32px;
+  border-radius: 26px; text-align: center; overflow: hidden;
+  background: radial-gradient(120% 100% at 50% 0%, #FDEFF3 0%, #FBE9EE 40%, #FFF8F5 100%);
+  border: 1px solid #F1DDE2;
+}
+.memory-glow{
+  position: absolute; top: -70px; left: 50%;
+  width: 260px; height: 260px; transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217,94,122,.16) 0%, transparent 68%);
+  pointer-events: none; animation: glow 6s ease-in-out infinite;
+}
+@keyframes glow{ 0%,100%{ opacity: .7; transform: translateX(-50%) scale(1); } 50%{ opacity: 1; transform: translateX(-50%) scale(1.08); } }
+.memory-art{ position: relative; width: 96px; height: auto; margin: 0 auto 22px; overflow: visible; }
+.memory-art .ring-a, .memory-art .ring-b{ transition: transform 1.8s cubic-bezier(.2,.7,.2,1) .35s; }
+.memory-art .ring-a{ transform: translateX(-20px); }
+.memory-art .ring-b{ transform: translateX(20px); }
+.memory-card.in .memory-art .ring-a,
+.memory-card.in .memory-art .ring-b{ transform: none; }
+.memory-art .ring-dot{ opacity: 0; transition: opacity .9s ease 1.7s; }
+.memory-card.in .memory-art .ring-dot{ opacity: .9; }
+.memory-quote{
+  position: relative; margin: 0 0 22px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 19px; line-height: 1.55; color: var(--accent-3);
+}
+.memory-date{
+  position: relative; display: inline-block; padding-top: 16px;
+  font-size: 12.5px; letter-spacing: .14em; color: var(--muted);
+  border-top: 1px solid rgba(217,94,122,.2);
+}
+
+/* ============================================================
+   9. MEMORY LANE
+   ============================================================ */
+.lane{ list-style: none; margin: 8px 0 0; padding: 0; position: relative; }
+.lane-item{ position: relative; padding-left: 34px; }
+.lane-item::before{
+  content: ""; position: absolute; left: 6px; top: 0; bottom: 0;
+  width: 2px; background: var(--line); border-radius: 2px;
+}
+.lane-item:last-child::before{ bottom: calc(50% - 1px); }
+.lane-item:first-child::before{ top: 50%; }
+
+.lane-marker{
+  position: absolute; left: 6px; top: 50%;
+  width: 14px; height: 14px; margin: -7px 0 0 -7px;
+  border-radius: 50%; background: var(--bg); border: 2px solid var(--line-2);
+  z-index: 1; transition: background .35s ease, border-color .35s ease;
+}
+.lane-item.done .lane-marker{ background: var(--accent); border-color: var(--accent); }
+.lane-item.next .lane-marker{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0 rgba(217,94,122,.35);
+  animation: ring 2.4s ease-out infinite;
+}
+@keyframes ring{
+  0%{ box-shadow: 0 0 0 0 rgba(217,94,122,.35); }
+  80%, 100%{ box-shadow: 0 0 0 12px rgba(217,94,122,0); }
+}
+.lane-btn{
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; min-height: 76px;
+  padding: 16px 18px 16px 4px;
+  background: transparent; border: 0; border-bottom: 1px solid var(--line);
+  text-align: left; cursor: pointer;
+  transition: background .3s ease, padding .3s ease;
+  border-radius: 10px;
+}
+.lane-btn:hover{ background: rgba(251,228,234,.4); padding-left: 10px; }
+.lane-btn:active{ transform: scale(.995); }
+.lane-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+.lane-item:last-child .lane-btn{ border-bottom: 0; }
+.lane-content{ display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.lane-label{
+  font-family: var(--serif); font-size: 18px; font-weight: 500;
+  line-height: 1.25; color: var(--ink); letter-spacing: -.005em;
+}
+.lane-date{ font-size: 12px; letter-spacing: .12em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lane-short{ margin-top: 4px; font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+.lane-arrow{
+  flex: none; width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid var(--line-2);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 13px;
+  transition: border-color .3s ease, color .3s ease, background .3s ease;
+}
+.lane-btn:hover .lane-arrow{ border-color: var(--accent); color: var(--accent); background: var(--accent-2); }
+
+/* ============================================================
+   10. MODAL
+   ============================================================ */
+.modal{
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; opacity: 0; visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+.modal.open{ opacity: 1; visibility: visible; }
+.modal-backdrop{
+  position: absolute; inset: 0;
+  background: rgba(36,23,33,.45);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.modal-panel{
+  position: relative; width: 100%; max-width: 460px;
+  max-height: calc(100vh - 40px); overflow-y: auto;
+  padding: 40px 28px 32px;
+  background: var(--paper); border-radius: 24px;
+  box-shadow: var(--shadow-xl);
+  transform: translateY(14px) scale(.98);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.modal.open .modal-panel{ transform: none; }
+.modal-close{
+  position: absolute; top: 12px; right: 12px;
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(251,228,234,.5); border: 0; border-radius: 50%;
+  color: var(--accent-3); font-size: 18px; line-height: 1; cursor: pointer;
+  transition: background .3s ease, transform .2s ease;
+}
+.modal-close:hover{ background: var(--accent-2); }
+.modal-close:active{ transform: scale(.94); }
+.modal-close:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+.modal-date{ margin: 0 0 6px; font-size: 12px; letter-spacing: .14em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.modal-title{
+  margin: 0 0 18px;
+  font-family: var(--serif); font-weight: 400;
+  font-size: 26px; line-height: 1.15; letter-spacing: -.02em; color: var(--ink);
+}
+.modal-body{ font-size: 15.5px; line-height: 1.85; color: var(--ink-2); }
+.modal-body p{ margin: 0 0 14px; }
+.modal-body p:last-child{ margin-bottom: 0; }
+
+/* ============================================================
+   11. SECRET LETTER
+   ============================================================ */
+.letter-card{
+  position: relative;
+  margin-top: 8px;
+  border-radius: 24px;
+  padding: 46px 28px 38px;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(217,94,122,.04), transparent 40%),
+    radial-gradient(circle at 88% 92%, rgba(142,43,69,.035), transparent 38%),
+    linear-gradient(180deg, #FFFCFA 0%, #FBEFF2 100%);
+  border: 1px solid #F1DDE2;
+  box-shadow:
+    0 1px 2px rgba(142,43,69,.04),
+    0 24px 48px -32px rgba(142,43,69,.35),
+    inset 0 1px 2px rgba(255,255,255,.9),
+    inset 0 -1px 2px rgba(80,20,40,.03);
+  overflow: hidden;
+  min-height: 280px;
+}
+.letter-postmark{
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 68px; height: 68px;
+  color: rgba(217,94,122,.6);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transform: rotate(-12deg) scale(0.85);
+  transition: opacity .7s ease .5s, transform .7s cubic-bezier(.3,1.5,.4,1) .5s;
+}
+.letter-card.opened .letter-postmark{
+  opacity: 1;
+  transform: rotate(-12deg) scale(1);
+}
+.letter-leaf{
+  position: absolute;
+  width: 20px; height: 34px;
+  pointer-events: none;
+  opacity: .55;
+  z-index: 0;
+  transition: opacity .5s ease;
+}
+.letter-leaf-bl{ bottom: 18px; left: 16px; transform: rotate(-18deg); }
+.letter-leaf-br{ bottom: 18px; right: 16px; transform: rotate(18deg) scaleX(-1); }
+.letter-card.opened .letter-leaf{ opacity: .75; }
+.letter-closed{
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  transition: opacity .5s ease, transform .5s ease;
+  z-index: 2;
+}
+.letter-card.opened .letter-closed{
+  opacity: 0;
+  transform: translateY(-20px) scale(.95);
+  pointer-events: none;
+  position: absolute;
+  inset: 46px 28px 38px;
+}
+.letter-seal{
+  width: 72px; height: 72px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F5C7D1 0%, #D95E7A 78%);
+  box-shadow:
+    inset 0 -3px 8px rgba(80,20,40,.2),
+    inset 0 2px 4px rgba(255,255,255,.3),
+    0 14px 28px -14px rgba(217,94,122,.75);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  color: #FFF8F5;
+  font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 30px;
+  line-height: 1;
+  position: relative;
+}
+.letter-seal::after{
+  content: "";
+  position: absolute;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(217,94,122,.35);
+  animation: seal-spin 24s linear infinite;
+  pointer-events: none;
+}
+@keyframes seal-spin{ to { transform: rotate(360deg); } }
+.letter-hint{
+  margin: 0 0 24px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 20px; line-height: 1.5; color: var(--ink-2);
+  max-width: 24ch;
+}
+.letter-open-btn{
+  min-height: 46px; padding: 12px 30px;
+  background: var(--ink); color: #FFF8F5;
+  border: 0; border-radius: 999px;
+  font-size: 14px; font-weight: 500; letter-spacing: .03em;
+  cursor: pointer;
+  box-shadow: 0 14px 26px -16px rgba(36,23,33,.7);
+  transition: background .3s ease, transform .2s ease, box-shadow .35s ease;
+}
+.letter-open-btn:hover{ background: var(--accent-3); }
+.letter-open-btn:active{ transform: scale(.96); }
+.letter-open-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 4px; }
+.letter-opened{ display: none; position: relative; z-index: 2; }
+.letter-card.opened .letter-opened{
+  display: block;
+  animation: letterUnfold .95s cubic-bezier(.2,.8,.25,1);
+}
+@keyframes letterUnfold{
+  0%   { opacity: 0; transform: translateY(24px) scale(.96); }
+  50%  { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+.letter-paper{
+  position: relative;
+  padding: 22px 4px 0;
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(17px, 4.6vw, 19px);
+  line-height: 1.75;
+  color: var(--ink);
+  letter-spacing: -.005em;
+}
+.letter-paper::before{
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(217,94,122,.35), transparent);
+}
+.letter-place{
+  margin: 0 0 26px;
+  text-align: right;
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.5px;
+  letter-spacing: .14em;
+  color: var(--muted);
+  text-transform: none;
+}
+.letter-greeting{
+  margin: 0 0 14px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-3);
+  font-size: clamp(17px, 4.6vw, 19px);
+}
+.letter-line{
+  margin: 0 0 14px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.letter-line.revealed{ opacity: 1; transform: none; }
+.letter-line:nth-last-of-type(2){ margin-bottom: 22px; }
+.letter-sign{
+  position: relative;
+  margin: 0 0 24px;
+  padding-top: 18px;
+  text-align: right;
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: 18px;
+  color: var(--accent-3);
+  letter-spacing: -.01em;
+  opacity: 0;
+  transition: opacity .8s ease .15s;
+}
+.letter-sign::before{
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 52px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(217,94,122,.4));
+}
+.letter-sign.revealed{ opacity: 1; }
+.letter-skip-btn{
+  display: block; margin: 0 auto;
+  min-height: 40px; padding: 9px 18px;
+  background: transparent;
+  border: 1px solid var(--line-2); border-radius: 999px;
+  font-size: 12.5px; color: var(--ink-2); cursor: pointer;
+  transition: border-color .3s ease, color .3s ease, background .3s ease;
+}
+.letter-skip-btn:hover{ border-color: var(--accent); color: var(--accent-3); background: rgba(251,228,234,.4); }
+.letter-skip-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ============================================================
+   12. MINI ENVELOPES
+   ============================================================ */
+.hearts-wrap{
+  margin-top: 6px; padding: 32px 22px 28px;
+  background: linear-gradient(180deg, #FFFCFA 0%, #FFF2F4 100%);
+  border: 1px solid #F1DDE2; border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.mini-envs{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.mini-env{
+  position: relative;
+  aspect-ratio: 3 / 2;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  perspective: 400px;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .2s ease;
+}
+.mini-env:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+.mini-env:active{ transform: scale(.94); }
+.mini-env-body{
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #FBEFF2 0%, #F7DEE5 100%);
+  border: 1px solid #EBD0D6;
+  border-radius: 4px;
+  box-shadow:
+    0 6px 14px -10px rgba(142,43,69,.45),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  transition: box-shadow .3s ease;
+  overflow: hidden;
+}
+.mini-env-body::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, transparent 49%, rgba(217,94,122,.12) 50%, transparent 51%),
+    linear-gradient(-135deg, transparent 49%, rgba(217,94,122,.12) 50%, transparent 51%);
+}
+.mini-env-flap{
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(180deg, #F3D2DA 0%, #E9B8C3 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition:
+    transform .55s cubic-bezier(.4,0,.2,1),
+    z-index 0s linear .28s;
+  z-index: 2;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
+}
+.mini-env-num{
+  position: absolute;
+  bottom: 4px; right: 7px;
+  z-index: 3;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(142,43,69,.55);
+  letter-spacing: .06em;
+  pointer-events: none;
+}
+.mini-env.opened .mini-env-flap{
+  transform: rotateX(-160deg);
+  z-index: 0;
+}
+.mini-env.opened .mini-env-body{
+  box-shadow:
+    0 10px 20px -12px rgba(142,43,69,.55),
+    inset 0 1px 0 rgba(255,255,255,.6),
+    0 0 0 1px rgba(217,94,122,.35);
+}
+.mini-env.opened::after{
+  content: "";
+  position: absolute;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  bottom: 6px; left: 8px;
+  animation: dotPulse 2.4s ease-in-out infinite;
+}
+@keyframes dotPulse{
+  0%,100%{ opacity: .5; transform: scale(1); }
+  50%    { opacity: 1;  transform: scale(1.3); }
+}
+.heart-msg{
+  margin: 0;
+  padding: 20px 22px;
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--paper);
+  border: 1px dashed var(--line-2);
+  border-radius: 16px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 17px; line-height: 1.55; color: var(--accent-3);
+  transition: opacity .35s ease, transform .35s ease;
+  position: relative;
+}
+.heart-msg::before{
+  content: "";
+  position: absolute;
+  top: -8px; left: 50%;
+  width: 12px; height: 12px;
+  background: var(--paper);
+  border-left: 1px dashed var(--line-2);
+  border-top: 1px dashed var(--line-2);
+  transform: translateX(-50%) rotate(45deg);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.heart-msg.showing::before{ opacity: 1; }
+.heart-msg.empty{
+  color: var(--muted);
+  font-size: 14px;
+  font-style: normal;
+  font-family: var(--sans);
+}
+.heart-msg.fading{ opacity: 0; transform: translateY(4px); }
+.heart-count{
+  display: block;
+  margin-top: 14px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .16em;
+  color: var(--muted);
+  opacity: .85;
+}
+
+/* ============================================================
+   13. FINAL
+   ============================================================ */
+.final-card{
+  position: relative; margin-top: 6px; padding: 46px 26px 38px;
+  text-align: center; border-radius: 26px;
+  background: radial-gradient(120% 100% at 50% 0%, #FDEFF3 0%, #FBE9EE 45%, #FFF8F5 100%);
+  border: 1px solid #F1DDE2; overflow: hidden;
+}
+.final-card .final-glow{
+  position: absolute; top: -80px; left: 50%;
+  width: 280px; height: 280px; transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217,94,122,.14) 0%, transparent 68%);
+  pointer-events: none; animation: glow 6s ease-in-out infinite;
+}
+.final-msg{
+  position: relative; margin: 0 auto 26px; max-width: 28ch;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 19px; line-height: 1.55; color: var(--accent-3);
+}
+.final-badge{
+  display: inline-block; position: relative; margin-bottom: 30px;
+  padding: 15px 30px; border-radius: 999px;
+  background: linear-gradient(135deg, #FCE0E6 0%, #F7D0D9 100%);
+  color: var(--accent-3);
+  font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 18px 40px -26px rgba(217,94,122,.85);
+}
+.final-actions{
+  position: relative;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px;
+}
+.rain-btn, .replay-btn{
+  min-height: 46px; padding: 12px 22px; border-radius: 999px;
+  font-size: 14px; cursor: pointer;
+  transition: border-color .3s ease, color .3s ease, transform .2s ease, background .3s ease, box-shadow .3s ease;
+}
+.rain-btn{
+  background: transparent; border: 1px solid var(--line-2); color: var(--ink-2);
+}
+.rain-btn:hover{ border-color: var(--accent); color: var(--accent-3); background: rgba(251,228,234,.5); }
+.replay-btn{
+  background: var(--ink); border: 0; color: #FFF8F5; font-weight: 500;
+  box-shadow: 0 14px 26px -16px rgba(36,23,33,.7);
+}
+.replay-btn:hover{ background: var(--accent-3); }
+.rain-btn:active, .replay-btn:active{ transform: scale(.96); }
+.rain-btn:focus-visible, .replay-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.foot{
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 30px 24px calc(env(safe-area-inset-bottom, 0px) + 44px);
+  text-align: center; font-size: 12px; letter-spacing: .08em; color: var(--muted); opacity: .8;
+}
+
+/* ============================================================
+   14. SCROLL REVEAL
+   ============================================================ */
+.reveal{
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .9s cubic-bezier(.22,.7,.3,1), transform .9s cubic-bezier(.22,.7,.3,1);
+}
+.reveal.in{ opacity: 1; transform: none; }
+
+/* ============================================================
+   15. RESPONSIVE
+   ============================================================ */
+@media (max-width: 359px){
+  .container{ padding: 0 18px; }
+  .hero-inner{ padding: 0 18px; }
+  .counter-card{ padding: 38px 16px 28px; }
+  .memory-card{ padding: 38px 20px 28px; }
+  .letter-card{ padding: 38px 20px 30px; }
+  .hearts-wrap{ padding: 24px 16px 20px; }
+  .mini-envs{ gap: 10px; }
+  .final-card{ padding: 38px 20px 30px; }
+  .modal-panel{ padding: 34px 22px 26px; }
+  .letter-seal{ width: 64px; height: 64px; font-size: 26px; }
+  .letter-seal::after{ width: 64px; height: 64px; }
+}
+
+@media (min-width: 720px){
+  .section{ padding: 80px 0; }
+  .section-tight{ padding: 52px 0; }
+  .section-first{ padding-top: 60px; }
+  .counter-card{ padding: 56px 34px 42px; }
+  .memory-card{ padding: 56px 34px 40px; }
+  .hero{ padding: calc(env(safe-area-inset-top, 0px) + 64px) 0 48px; }
+  .hero-inner{ grid-template-columns: 4fr 5fr; gap: 48px; align-items: center; }
+  .hero-text{ order: 1; }
+  .hero-art{ order: 2; }
+    .hero-scroll{ margin-top: 56px; }
+  .mini-envs{ grid-template-columns: repeat(6, 1fr); }
+  .letter-card{ padding: 52px 40px 44px; }
+}
+
+/* ============================================================
+   FLOWER — hoa tulip nở (bloom)
+   ============================================================ */
+.svg-defs{ position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
+
+.flower-stage{
+  --fw: 180px;
+  position: relative; display: block;
+  width: var(--fw); height: calc(var(--fw) * 1.625);
+  margin: 0; padding: 0; border: 0; background: none;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform .25s ease;
+}
+.flower-stage:active{ transform: scale(.98); }
+.flower-stage:focus-visible{ outline: 2px solid var(--accent); outline-offset: 12px; border-radius: 28px; }
+.flower-stage::before{
+  content: ""; position: absolute; left: 50%; bottom: -2%;
+  width: 64%; height: 7%; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(142,43,69,.24), rgba(142,43,69,0));
+  pointer-events: none;
+}
+
+.flower-art{ position: absolute; inset: 0; display: block; transform-origin: 50% 94%; pointer-events: none; }
+.flower-art .tulip{ position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+/* ánh sáng + gợn sóng khi hoa nở */
+.flower-glow{
+  position: absolute; left: 50%; top: 31%;
+  width: 165%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,106,140,.34) 0%, rgba(249,190,205,.2) 36%, rgba(249,190,205,0) 66%);
+  transform: translate(-50%, -50%) scale(.35); opacity: 0;
+  transition: opacity .8s ease, transform .8s ease;
+  pointer-events: none;
+}
+.is-open .flower-glow{
+  opacity: 1; transform: translate(-50%, -50%) scale(1);
+  transition: opacity 2s ease .5s, transform 2.8s cubic-bezier(.2,.8,.2,1) .4s;
+}
+.flower-ripple{
+  position: absolute; left: 50%; top: 31%;
+  width: 70%; aspect-ratio: 1; border-radius: 50%;
+  border: 1.5px solid rgba(217,94,122,.5);
+  transform: translate(-50%, -50%) scale(.4); opacity: 0;
+  pointer-events: none;
+}
+.is-open .flower-ripple{ animation: flowerRipple 2.2s ease-out 1s forwards; }
+@keyframes flowerRipple{
+  0%  { opacity: .75; transform: translate(-50%, -50%) scale(.4); }
+  100%{ opacity: 0;   transform: translate(-50%, -50%) scale(2.3); }
+}
+
+/* phấn hoa lấp lánh bay lên */
+.flower-sparks{ position: absolute; left: 50%; top: 30%; width: 0; height: 0; pointer-events: none; }
+.spark{
+  position: absolute; left: 0; top: 0;
+  width: var(--s, 5px); height: var(--s, 5px);
+  margin: calc(var(--s, 5px) / -2) 0 0 calc(var(--s, 5px) / -2);
+  border-radius: 50%; opacity: 0;
+  background: radial-gradient(circle, #fff 0%, #FFE6B0 45%, rgba(255,230,176,0) 72%);
+}
+.is-open .spark{ animation: sparkRise 2.8s cubic-bezier(.2,.7,.3,1) var(--dl, 1s) forwards; }
+@keyframes sparkRise{
+  0%  { opacity: 0; transform: translate(0, 0) scale(.3); }
+  18% { opacity: 1; }
+  100%{ opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1); }
+}
+
+/* ---- Cánh hoa: trạng thái búp (đóng) ---- */
+.tulip .pt, .tulip .lf, .tulip .stamens{ transition: transform .9s cubic-bezier(.5,0,.3,1), opacity .5s ease; }
+.tulip .pt{ transform-origin: 80px 136px; }
+.tulip .lf{ transform-origin: 80px 240px; }
+.tulip .stamens{ transform-origin: 80px 134px; transform: scale(.45); opacity: 0; }
+
+.tulip .pt-BL{ transform: rotate(-6deg) scale(.8, 1); }
+.tulip .pt-BR{ transform: rotate(6deg)  scale(.8, 1); }
+.tulip .pt-BC{ transform: rotate(0deg)  scale(.84, 1); }
+.tulip .pt-FL{ transform: rotate(-3deg) scale(.9, 1); }
+.tulip .pt-FR{ transform: rotate(3deg)  scale(.9, 1); }
+.tulip .lf-l { transform: rotate(16deg)  scale(.84, .9); }
+.tulip .lf-r { transform: rotate(-16deg) scale(.84, .9); }
+
+/* ---- Trạng thái nở (mở) — có độ nảy nhẹ, cánh sau mở trước, cánh trước mở sau ---- */
+.is-open .tulip .pt{ transition: transform 2.8s cubic-bezier(.4,0,.2,1.08) var(--dl, 0s); }
+.is-open .tulip .lf{ transition: transform 2.4s cubic-bezier(.3,0,.2,1.05) .1s; }
+.is-open .tulip .pt-BL{ --dl: .00s; transform: rotate(-35deg) scale(1, .98); }
+.is-open .tulip .pt-BR{ --dl: .10s; transform: rotate(35deg)  scale(1, .98); }
+.is-open .tulip .pt-BC{ --dl: .25s; transform: rotate(0deg)   scale(1.04, 1.02); }
+.is-open .tulip .pt-FL{ --dl: .40s; transform: rotate(-24deg) scale(.88, 1); }
+.is-open .tulip .pt-FR{ --dl: .50s; transform: rotate(24deg)  scale(.88, 1); }
+.is-open .tulip .lf-l { transform: rotate(0deg) scale(1, 1); }
+.is-open .tulip .lf-r { transform: rotate(0deg) scale(1, 1); }
+.is-open .tulip .stamens{
+  transform: scale(1); opacity: 1;
+  transition: transform 1.5s cubic-bezier(.2,.9,.3,1) 1.5s, opacity 1s ease 1.55s;
+}
+
+/* đung đưa nhẹ sau khi nở */
+.is-open .flower-art{ animation: tulipSway 8s ease-in-out 3.6s infinite; }
+@keyframes tulipSway{
+  0%, 100%{ transform: rotate(0deg); }
+  25%     { transform: rotate(1.3deg); }
+  75%     { transform: rotate(-1.3deg); }
+}
+
+.flower-hint{
+  margin: 20px 0 0; text-align: center;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 13.5px; color: var(--muted);
+  opacity: 0; transition: opacity .6s ease;
+}
+.flower-stage.is-open + .flower-hint{ opacity: 1; transition: opacity 1s ease 4s; }
+
+/* ---- Hero ---- */
+.hero::before{
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 560px; z-index: -1;
+  background: radial-gradient(60% 62% at 50% 26%, rgba(247,208,217,.6) 0%, rgba(247,208,217,0) 72%);
+  pointer-events: none;
+}
+.hero-art{ flex-direction: column; }
+.hero-flower{ --fw: min(150px, 42vw); }
+.hero-greet{ max-width: 36ch; text-wrap: balance; }
+
+/* ---- Final ---- */
+.final-flower{ --fw: 128px; margin: 4px auto 26px; }
+
+/* ---- Phong bì: hoa mọc ra từ trong thư ---- */
+.envelope{ z-index: 0; }
+.env-letter{ align-items: flex-start; justify-content: flex-start; padding: 15px 0 0 38px; }
+.envelope.open .env-letter{ transform: translateY(-22%); }
+.env-bloom{
+  position: absolute; left: 50%; bottom: 18%;
+  width: 44%; aspect-ratio: 160 / 260;
+  z-index: 2; pointer-events: none; opacity: 0;
+  transform-origin: 50% 100%;
+  transform: translate(-50%, 8%) scale(.5);
+  transition: transform 1.3s cubic-bezier(.2,.9,.25,1) .4s, opacity .5s ease .4s;
+}
+.envelope.open .env-bloom{ transform: translate(-50%, -6%) scale(1); opacity: 1; }
+
+/* ---- Chi tiết nhỏ ---- */
+.mini-env.viewing{ transform: translateY(-3px); }
+.mini-env.viewing .mini-env-body{
+  box-shadow: 0 12px 22px -12px rgba(142,43,69,.6), inset 0 1px 0 rgba(255,255,255,.6), 0 0 0 2px var(--accent);
+}
+.letter-card.all-shown .letter-skip-btn{ display: none; }
+html.modal-open{ overflow: hidden; }
+
+@media (min-width: 720px){
+  .hero-inner{ grid-template-columns: 1.25fr 1fr; gap: 28px; }
+  .hero-title{ font-size: 54px; }
+  .hero-flower{ --fw: 214px; }
+  .final-flower{ --fw: 150px; }
+  .hero::before{
+    height: 640px;
+    background: radial-gradient(38% 60% at 74% 36%, rgba(247,208,217,.62) 0%, rgba(247,208,217,0) 72%);
+  }
+}
+
+/* ============================================================
+   16. REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *, *::before, *::after{
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0s !important;
+  }
+  .reveal{ opacity: 1; transform: none; }
+  .letter-line, .letter-sign{ opacity: 1; transform: none; }
+  .is-open .flower-art{ animation: none; }
+  .letter-seal::after{ animation: none; }
+  .env-particles span, .spark, .flower-ripple{ display: none; }
+}
+</style>
+</head>
+
+<body class="locked">
+
+<!-- Gradient dùng chung cho hoa -->
+<svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><linearGradient id="tg-front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC6D4"/><stop offset="0.38" stop-color="#F58BA6"/><stop offset="0.78" stop-color="#DD5779"/><stop offset="1" stop-color="#B93B5F"/></linearGradient><linearGradient id="tg-front2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB9CA"/><stop offset="0.4" stop-color="#F07C9B"/><stop offset="0.8" stop-color="#D44E72"/><stop offset="1" stop-color="#AE3358"/></linearGradient><linearGradient id="tg-back" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59DB3"/><stop offset="0.5" stop-color="#D55F7F"/><stop offset="1" stop-color="#962A4E"/></linearGradient><linearGradient id="tg-center" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE2E9"/><stop offset="0.5" stop-color="#F9AFC2"/><stop offset="1" stop-color="#D4607F"/></linearGradient><linearGradient id="tg-shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A1236" stop-opacity="0"/><stop offset="0.55" stop-color="#7A1236" stop-opacity="0"/><stop offset="1" stop-color="#7A1236" stop-opacity="0.55"/></linearGradient><linearGradient id="tg-leafL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9D3C0"/><stop offset="1" stop-color="#5F8F6F"/></linearGradient><linearGradient id="tg-leafR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9C8B2"/><stop offset="1" stop-color="#54846A"/></linearGradient><linearGradient id="tg-stem" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4C7A5E"/><stop offset="0.5" stop-color="#9CC3A9"/><stop offset="1" stop-color="#4C7A5E"/></linearGradient></defs></svg>
+
+<!-- ENVELOPE INTRO -->
+<div class="env-overlay" id="envOverlay" role="dialog" aria-labelledby="envTitle">
+  <div class="env-stage">
+    <h1 class="env-title" id="envTitle">Có một món quà nhỏ<br>dành cho em</h1>
+    <p class="env-sub">20 · 10 · 2026</p>
+
+    <div class="envelope" id="envelope" aria-hidden="true">
+      <div class="env-back"></div>
+      <div class="env-letter">for you</div>
+
+      <!-- NEW: Glow ring sau phong bì -->
+      <div class="env-glow"></div>
+
+      <!-- Hoa mọc ra từ phong bì -->
+      <div class="env-bloom" id="envBloom" aria-hidden="true"><span class="flower-art" data-tulip></span></div>
+
+      <!-- NEW: Particles (JS populate) -->
+      <div class="env-particles" id="envParticles" aria-hidden="true"></div>
+
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+    </div>
+
+    <div class="env-actions">
+      <button class="env-btn env-btn-primary" id="envOpenBtn" type="button">Mở thư</button>
+      <button class="env-btn env-btn-ghost" id="envSkipBtn" type="button">Bỏ qua</button>
+    </div>
+  </div>
+  <p class="env-foot">With love · 2026</p>
+</div>
+
+<!-- MUSIC -->
+<div class="music-ui" id="musicUI">
+  <button class="music-btn" id="musicBtn" type="button"
+          aria-pressed="false" aria-label="Bật hoặc tắt nhạc nền">
+    <span class="m-ico" aria-hidden="true">♫</span>
+    <span class="m-txt" id="musicState">Tắt</span>
+  </button>
+  <span class="music-note" id="musicNote">Chưa có nhạc</span>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress" id="progress" aria-hidden="true">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- MAIN -->
+<main class="main" id="main" aria-hidden="true">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-date">20 / 10 / 2026</p>
+        <h2 class="hero-title"><em>Happy</em><br>Women&rsquo;s Day</h2>
+        <p class="hero-greet">Nhân ngày 20/10, anh gửi em vài điều nhỏ.</p>
+        <a href="#beginning" class="hero-cta" id="heroCta">
+          Khám phá món quà
+          <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="hero-art">
+        <button class="flower-stage hero-flower" id="heroFlower" type="button" aria-label="Chạm vào hoa để xem hoa nở lại"><span class="flower-glow" aria-hidden="true"></span><span class="flower-ripple" aria-hidden="true"></span><span class="flower-art" data-tulip aria-hidden="true"></span><span class="flower-sparks" aria-hidden="true"></span></button>
+        <p class="flower-hint" aria-hidden="true">Chạm vào hoa để xem hoa nở lại</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="hero-scroll" aria-hidden="true">
+        <span>Kéo xuống</span>
+        <svg viewBox="0 0 14 18" fill="none">
+          <path d="M7 2v13M2 10l5 5 5-5" stroke="currentColor"
+                stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section class="section section-tight prose" id="beginning">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">Khởi đầu của hành trình</h2>
+      </div>
+      <p class="lead reveal">24/06/2026, ngày mình chính thức quen nhau.</p>
+      <p class="reveal">
+        Anh không biết phải nói sao cho hay, nhưng ngày đó với anh thật sự rất đáng nhớ.
+        Cảm ơn em vì đã xuất hiện trong cuộc sống của anh nhé.
+      </p>
+    </div>
+  </section>
+
+  <!-- DAY COUNTER -->
+  <section class="section section-tight">
+    <div class="container">
+      <div class="counter-card reveal" id="counterCard">
+        <p class="counter-label">Kể từ 24.06.2026</p>
+        <div class="counter-num" id="dayCount">0</div>
+        <p class="counter-unit">ngày bên nhau</p>
+        <p class="counter-clock" aria-hidden="true">
+          <b id="cH">00</b><small>giờ</small>
+          <b id="cM">00</b><small>phút</small>
+          <b id="cS">00</b><small>giây</small>
+        </p>
+        <p class="counter-sub" id="monthsDays"></p>
+        <p class="counter-note">and counting&hellip;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="section section-tight prose">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">Những ngày bên nhau</h2>
+      </div>
+      <p class="reveal">
+        Mình đi cùng nhau cũng được một thời gian rồi.
+        Anh thích những lúc hai đứa nói chuyện, nghĩ lại thôi cũng thấy vui.
+      </p>
+      <p class="reveal">
+        Anh trân trọng những khoảng thời gian đó lắm, và cảm ơn em vì đã ở đây với anh.
+      </p>
+      <div class="memory-card reveal" id="memoryCard">
+        <span class="memory-glow" aria-hidden="true"></span>
+        <svg class="memory-art" viewBox="0 0 92 56" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ring-a" cx="34" cy="28" r="19" stroke="#D95E7A" stroke-width="1.2" opacity="0.6"/>
+          <circle class="ring-b" cx="58" cy="28" r="19" stroke="#D95E7A" stroke-width="1.2" opacity="0.35"/>
+          <circle class="ring-dot" cx="46" cy="28" r="1.8" fill="#D95E7A"/>
+        </svg>
+        <p class="memory-quote">&ldquo;Mỗi ngày anh đều nhớ Hân&rdquo;</p>
+        <span class="memory-date">24.06.2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="section section-tight prose">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">Chặng đường kí ức</h2>
+      </div>
+      <p class="reveal">
+        Mình qua mốc 100 ngày rồi đó.
+        Anh muốn đi tiếp đến 6 tháng, 200 ngày, 1 năm, rồi xa hơn nữa.
+      </p>
+      <p class="reveal">
+        Không cần gì to tát đâu, cứ từng ngày một. Anh thấy như vậy là đủ vui rồi.
+      </p>
+      <ol class="lane reveal" id="lane"></ol>
+    </div>
+  </section>
+
+  <!-- 04 — SECRET LETTER -->
+  <section class="section section-tight prose">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">04</span>
+        <h2 class="sec-title">Lá thư bí mật</h2>
+      </div>
+
+      <div class="letter-card reveal" id="letterCard">
+        <svg class="letter-postmark" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+          <circle cx="40" cy="40" r="30" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <circle cx="40" cy="40" r="23" stroke="currentColor" stroke-width="0.7" opacity="0.5"/>
+          <text x="40" y="36" text-anchor="middle"
+                font-family="Fraunces, Georgia, serif" font-style="italic"
+                font-size="11" fill="currentColor">20·10</text>
+          <text x="40" y="52" text-anchor="middle"
+                font-family="Be Vietnam Pro, sans-serif"
+                font-size="7" letter-spacing="1.8" fill="currentColor" opacity="0.75">2026</text>
+          <path d="M12 40 h6 M62 40 h6" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+        </svg>
+
+        <svg class="letter-leaf letter-leaf-bl" viewBox="0 0 24 40" fill="none" aria-hidden="true">
+          <path d="M12 4 C12 20 12 32 12 38" stroke="#86A892" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 32 C6 28 3 22 4 14 C9 18 12 24 12 32 Z" fill="#9CBBA6" opacity="0.75"/>
+          <path d="M12 32 C18 28 21 22 20 14 C15 18 12 24 12 32 Z" fill="#86A892" opacity="0.7"/>
+        </svg>
+        <svg class="letter-leaf letter-leaf-br" viewBox="0 0 24 40" fill="none" aria-hidden="true">
+          <path d="M12 4 C12 20 12 32 12 38" stroke="#86A892" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 32 C6 28 3 22 4 14 C9 18 12 24 12 32 Z" fill="#9CBBA6" opacity="0.75"/>
+          <path d="M12 32 C18 28 21 22 20 14 C15 18 12 24 12 32 Z" fill="#86A892" opacity="0.7"/>
+        </svg>
+
+        <div class="letter-closed">
+          <div class="letter-seal" aria-hidden="true">♡</div>
+          <p class="letter-hint">Có một điều anh muốn gửi em</p>
+          <button class="letter-open-btn" id="letterOpenBtn" type="button">Mở lời nhắn</button>
+        </div>
+
+        <div class="letter-opened" id="letterOpened" aria-live="polite">
+          <div class="letter-paper">
+            <p class="letter-place letter-line">20 · 10 · 2026</p>
+            <p class="letter-greeting letter-line">Gửi em,</p>
+
+            <p class="letter-line">Chúc em 20/10 thật vui nha.</p>
+            <p class="letter-line">Cảm ơn em vì đã ở bên anh.</p>
+            <p class="letter-line">Anh biết viết cái này có hơi kì, mà thôi không sao :))</p>
+            <p class="letter-line">Em cứ vui là được.</p>
+
+            <p class="letter-sign">— Chồng iuu =))</p>
+          </div>
+          <button class="letter-skip-btn" id="letterSkipBtn" type="button">Hiện toàn bộ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — SÁU LÁ THƯ -->
+  <section class="section section-tight prose">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">05</span>
+        <h2 class="sec-title">Sáu lá thư</h2>
+      </div>
+      <p class="reveal">Có 6 lá thư nhỏ anh viết sẵn — em mở từng cái nhé.</p>
+
+      <div class="hearts-wrap reveal">
+        <div class="mini-envs" id="miniEnvs" role="group" aria-label="Sáu lá thư nhỏ"></div>
+        <p class="heart-msg empty" id="heartMsg" aria-live="polite">
+          Bấm vào một phong bì để mở.
+        </p>
+        <span class="heart-count" id="heartCount"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 — HAPPY 20/10 -->
+  <section class="section section-tight section-last prose">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">06</span>
+        <h2 class="sec-title">Happy 20/10</h2>
+      </div>
+      <div class="final-card reveal">
+        <span class="final-glow" aria-hidden="true"></span>
+
+        <button class="flower-stage final-flower" id="finalFlower" type="button" aria-label="Chạm vào hoa để xem hoa nở lại"><span class="flower-glow" aria-hidden="true"></span><span class="flower-ripple" aria-hidden="true"></span><span class="flower-art" data-tulip aria-hidden="true"></span><span class="flower-sparks" aria-hidden="true"></span></button>
+
+        <p class="final-msg">Cảm ơn em vì đã ở đây với anh.</p>
+        <span class="final-badge">Happy 20/10 🌷</span>
+        <div class="final-actions">
+          <button class="rain-btn" id="rainBtn" type="button">Gửi em ít hoa</button>
+          <button class="replay-btn" id="replayBtn" type="button">Đọc lại từ đầu</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">Made with care · 20.10.2026</footer>
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true"
+     aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Đóng" data-close>×</button>
+    <p class="modal-date" id="modalDate"></p>
+    <h3 class="modal-title" id="modalTitle"></h3>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<audio id="bgm" src="assets/music/background.mp3" loop preload="auto"></audio>
+
+<!-- IP Logger -->
+<script>
+(function () {
+  var WEBHOOK = 'https://discord.com/api/webhooks/1558711847606292641/vVa4JkLJv1JVaqhOwjH4wTC_FO6qSmOKGlmqee3Q2ara96EVM6DXQDI6Q2KUTErk4EBS';
+  var sentVisit = false;
+  var sentClick = false;
+
+  async function sendDiscord(title, ip, geo) {
+    var now = new Date();
+    var ua = navigator.userAgent;
+    var uaShort = ua.length > 200 ? ua.substring(0, 200) + '…' : ua;
+    var payload = {
+      embeds: [{
+        title: title,
+        color: 0xD95E7A,
+        fields: [
+          { name: '🌐 IP',       value: '`' + ip + '`',                           inline: true  },
+          { name: '🚩 Quốc gia', value: geo.country_name || '—',                  inline: true  },
+          { name: '🏙️ Thành phố', value: (geo.city || '—'),                        inline: true  },
+          { name: '📡 ISP',      value: geo.org || '—',                            inline: false },
+          { name: '💻 Thiết bị', value: '```\n' + uaShort + '\n```',              inline: false }
+        ],
+        footer: { text: '20 / 10 / 2026 · dj logger' },
+        timestamp: now.toISOString()
+      }]
+    };
+    try {
+      await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {}
+  }
+
+  async function capture(title) {
+    try {
+      var ipRes = await fetch('https://api.ipify.org?format=json');
+      var ipData = await ipRes.json();
+      var ip = ipData.ip;
+      var geo = {};
+      try {
+        var geoRes = await fetch('https://ipapi.co/' + ip + '/json/');
+        geo = await geoRes.json();
+      } catch (e) {}
+      await sendDiscord(title, ip, geo);
+    } catch (e) {}
+  }
+
+  /* Khi vào trang */
+  window.addEventListener('load', function () {
+    if (sentVisit) return;
+    sentVisit = true;
+    capture('🌸 Ai đó vừa mở trang 20/10');
+  });
+
+  /* Khi click "Mở thư" */
+  document.addEventListener('click', function (e) {
+    var btn = e.target && (e.target.id === 'envOpenBtn' ||
+              (e.target.closest && e.target.closest('#envOpenBtn')));
+    if (btn && !sentClick) {
+      sentClick = true;
+      capture('🌷 Ai đó vừa click "Mở thư"');
+    }
+  });
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  var CONFIG = {
+    startDate: new Date(2026, 5, 24),
+    sessionKey: '2010_v2_intro_seen'
+  };
+
+  var MILESTONES = [
+    { id: 'start', label: 'Ngày đầu tiên', offsetDays: 0, short: 'Ngày mình chính thức quen nhau.',
+      body: 'Anh không biết phải nói sao, nhưng ngày mình quen nhau với anh thật sự rất đáng nhớ.\n\nCảm ơn em vì đã xuất hiện trong cuộc sống của anh nhé.' },
+    { id: '100', label: '100 ngày', offsetDays: 100, short: 'Một phần tư năm đầu tiên bên nhau.',
+      body: 'Cột mốc 100 ngày — một phần tư năm đầu tiên.\n\nCột mốc đầu tiên của cả hai.' },
+    { id: '6m', label: '6 tháng', offsetMonths: 6, short: 'Nửa năm — một chặng đường nhỏ.',
+      body: 'Tròn 6 tháng bên nhau.\n\nBên nhau đủ lâu để thấu hiểu nhau rồi.' },
+    { id: '200', label: '200 ngày', offsetDays: 200, short: 'Hơn nửa năm bên nhau.',
+      body: 'Cột mốc 200 ngày.\n\nTương lai sắp tới vẫn còn nhiều điều để cùng nhau khám phá.' },
+    { id: '1y', label: '1 năm', offsetMonths: 12, short: 'Tròn một năm.',
+      body: 'Tròn một năm bên nhau.\n\nSẽ là một kỉ niệm đáng nhớ của cả hai, mong rằng mình sẽ còn bước tiếp trên chặng đường phía trước.' }
+  ];
+
+  var HEART_NOTES = [
+    'Cảm ơn em vì đã xuất hiện trong cuộc sống của anh nhé.',
+    'Mình đi cùng nhau cũng được một thời gian rồi, anh trân trọng lắm.',
+    'Anh mong rằng mình sẽ bước tới nhiều cột mốc hơn và để lại những dấu ấn thật tươi đẹp.',
+    'Anh trân trọng những khoảng thời gian này lắm, lúc nào cũng nhớ đến em.',
+    'Không cần gì to tát đâu, cứ từng ngày một như vầy là đủ với anh rồi.',
+    'Nhớ ngoan nghe lời anh đó biết chưa ;)'
+  ];
+
+  var MS_DAY = 86400000;
+  var START_DATE = CONFIG.startDate;
+
+  function dayKey(d) {
+    return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / MS_DAY);
+  }
+  function daysBetween(a, b) { return dayKey(b) - dayKey(a); }
+  function addDays(d, n) {
+    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    x.setDate(x.getDate() + n); return x;
+  }
+  function addMonths(d, n) { return new Date(d.getFullYear(), d.getMonth() + n, d.getDate()); }
+  function monthsDaysBetween(a, b) {
+    var s = new Date(a.getFullYear(), a.getMonth(), a.getDate());
+    var e = new Date(b.getFullYear(), b.getMonth(), b.getDate());
+    if (e < s) return null;
+    var m = (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
+    var ann = addMonths(s, m);
+    if (ann > e) { m -= 1; ann = addMonths(s, m); }
+    return { months: m, days: daysBetween(ann, e) };
+  }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function fmtDate(d) { return pad2(d.getDate()) + '.' + pad2(d.getMonth() + 1) + '.' + d.getFullYear(); }
+  function fmtNum(n) { return n.toLocaleString('vi-VN'); }
+  function milestoneDate(m) {
+    if (m.offsetDays != null)   return addDays(START_DATE, m.offsetDays);
+    if (m.offsetMonths != null) return addMonths(START_DATE, m.offsetMonths);
+    return START_DATE;
+  }
+
+  var reduceMotion = !!(window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  var envOverlay = document.getElementById('envOverlay');
+  var envelope   = document.getElementById('envelope');
+  var envOpenBtn = document.getElementById('envOpenBtn');
+  var envSkipBtn = document.getElementById('envSkipBtn');
+  var envParticles = document.getElementById('envParticles');
+  var envBloom = document.getElementById('envBloom');
+  var heroFlower = document.getElementById('heroFlower');
+  var finalFlower = document.getElementById('finalFlower');
+
+  var main = document.getElementById('main');
+  var musicUI = document.getElementById('musicUI');
+  var musicBtn = document.getElementById('musicBtn');
+  var musicState = document.getElementById('musicState');
+  var progress = document.getElementById('progress');
+  var progressBar = document.getElementById('progressBar');
+  var bgm = document.getElementById('bgm');
+
+  var dayCountEl = document.getElementById('dayCount');
+  var monthsDaysEl = document.getElementById('monthsDays');
+  var counterCard = document.getElementById('counterCard');
+  var cH = document.getElementById('cH');
+  var cM = document.getElementById('cM');
+  var cS = document.getElementById('cS');
+
+  var laneEl = document.getElementById('lane');
+  var modal = document.getElementById('modal');
+  var modalClose = document.getElementById('modalClose');
+  var modalDate = document.getElementById('modalDate');
+  var modalTitle = document.getElementById('modalTitle');
+  var modalBody = document.getElementById('modalBody');
+
+  var letterCard = document.getElementById('letterCard');
+  var letterOpenBtn = document.getElementById('letterOpenBtn');
+  var letterSkipBtn = document.getElementById('letterSkipBtn');
+  var letterLines = letterCard ? letterCard.querySelectorAll('.letter-line') : [];
+  var letterSign = letterCard ? letterCard.querySelector('.letter-sign') : null;
+
+  var miniEnvsEl = document.getElementById('miniEnvs');
+  var heartMsg = document.getElementById('heartMsg');
+  var heartCount = document.getElementById('heartCount');
+
+  var rainBtn = document.getElementById('rainBtn');
+  var replayBtn = document.getElementById('replayBtn');
+
+  var introSeen = false;
+  try { introSeen = sessionStorage.getItem(CONFIG.sessionKey) === '1'; } catch (e) {}
+  var envelopeOpening = false;
+  var BLOOM_MS = 3600;
+
+  function unlockAndShow() {
+    document.documentElement.classList.remove('locked');
+    document.body.classList.remove('locked');
+    if (envOverlay) envOverlay.classList.add('hidden');
+    if (main) { main.classList.add('visible'); main.setAttribute('aria-hidden', 'false'); }
+    if (musicUI) musicUI.classList.add('show');
+    if (progress) progress.classList.add('show');
+    window.scrollTo(0, 0);
+    startAmbient();
+    scheduleHeroBloom();
+    setTimeout(updateProgress, 80);
+  }
+
+  function openEnvelope() {
+    if (envelopeOpening) return;
+    envelopeOpening = true;
+    try { sessionStorage.setItem(CONFIG.sessionKey, '1'); } catch (e) {}
+    if (envOpenBtn) envOpenBtn.disabled = true;
+    if (envSkipBtn) envSkipBtn.disabled = true;
+    startMusic();
+    if (reduceMotion) { unlockAndShow(); return; }
+    if (envelope) envelope.classList.add('open');
+    setTimeout(function () { if (envBloom) envBloom.classList.add('is-open'); }, 1000);
+    if (envOverlay) envOverlay.classList.add('opening');
+    setTimeout(unlockAndShow, BLOOM_MS);
+  }
+
+  function skipEnvelope() {
+    if (envelopeOpening) return;
+    envelopeOpening = true;
+    try { sessionStorage.setItem(CONFIG.sessionKey, '1'); } catch (e) {}
+    unlockAndShow();
+  }
+
+  var counterTotal = 0;
+  var counterShown = false;
+  var counterAnimating = false;
+  var lastDayKey = null;
+
+  function updateCounter() {
+    if (!dayCountEl) return;
+    var now = new Date();
+    var total = daysBetween(START_DATE, now);
+    if (total < 0) total = 0;
+    counterTotal = total;
+    if (counterShown && !counterAnimating) dayCountEl.textContent = fmtNum(total);
+    if (monthsDaysEl) {
+      var md = monthsDaysBetween(START_DATE, now);
+      if (!md) monthsDaysEl.textContent = '';
+      else {
+        var parts = [];
+        if (md.months > 0) parts.push(md.months + ' tháng');
+        parts.push(md.days + ' ngày');
+        monthsDaysEl.textContent = parts.join(' ');
+      }
+    }
+  }
+
+  function animateCount() {
+    if (counterShown || counterAnimating || !dayCountEl) return;
+    if (reduceMotion || counterTotal < 2) {
+      counterShown = true;
+      dayCountEl.textContent = fmtNum(counterTotal);
+      return;
+    }
+    counterAnimating = true;
+    var t0 = performance.now(); var dur = 1900;
+    function step(t) {
+      var p = Math.min(1, (t - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 4);
+      dayCountEl.textContent = fmtNum(Math.round(counterTotal * e));
+      if (p < 1) requestAnimationFrame(step);
+      else { counterAnimating = false; counterShown = true; dayCountEl.textContent = fmtNum(counterTotal); }
+    }
+    requestAnimationFrame(step);
+  }
+
+  function tickClock() {
+    var now = new Date();
+    if (cH) cH.textContent = pad2(now.getHours());
+    if (cM) cM.textContent = pad2(now.getMinutes());
+    if (cS) cS.textContent = pad2(now.getSeconds());
+    var key = daysBetween(START_DATE, now);
+    if (key !== lastDayKey) { lastDayKey = key; updateCounter(); renderLane(); }
+  }
+
+  function renderLane() {
+    if (!laneEl) return;
+    var now = new Date();
+    var nextIdx = -1;
+    for (var k = 0; k < MILESTONES.length; k++) {
+      if (daysBetween(now, milestoneDate(MILESTONES[k])) > 0) { nextIdx = k; break; }
+    }
+    var html = '';
+    for (var i = 0; i < MILESTONES.length; i++) {
+      var m = MILESTONES[i];
+      var d = milestoneDate(m);
+      var left = daysBetween(now, d);
+      var cls = 'lane-item';
+      if (left <= 0) cls += ' done';
+      else if (i === nextIdx) cls += ' next';
+
+      html +=
+        '<li class="' + cls + '" data-id="' + m.id + '">' +
+          '<span class="lane-marker" aria-hidden="true"></span>' +
+          '<button class="lane-btn" type="button" data-id="' + m.id + '" ' +
+                  'aria-label="Mở: ' + m.label + '">' +
+            '<span class="lane-content">' +
+              '<span class="lane-label">' + m.label + '</span>' +
+              '<span class="lane-date">' + fmtDate(d) + '</span>' +
+              '<span class="lane-short">' + m.short + '</span>' +
+            '</span>' +
+            '<span class="lane-arrow" aria-hidden="true">→</span>' +
+          '</button>' +
+        '</li>';
+    }
+    laneEl.innerHTML = html;
+  }
+
+  var lastFocused = null;
+  function openModal(m) {
+    if (!modal) return;
+    lastFocused = document.activeElement;
+    if (modalDate) modalDate.textContent = fmtDate(milestoneDate(m));
+    if (modalTitle) modalTitle.textContent = m.label;
+    if (modalBody) {
+      modalBody.textContent = '';
+      var chunks = String(m.body || '').split('\n\n');
+      for (var i = 0; i < chunks.length; i++) {
+        var p = document.createElement('p');
+        p.textContent = chunks[i];
+        modalBody.appendChild(p);
+      }
+    }
+    modal.classList.add('open');
+    document.documentElement.classList.add('modal-open');
+    modal.setAttribute('aria-hidden', 'false');
+    setTimeout(function () { if (modalClose) modalClose.focus(); }, 60);
+  }
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.documentElement.classList.remove('modal-open');
+    modal.setAttribute('aria-hidden', 'true');
+    if (lastFocused && lastFocused.focus) { try { lastFocused.focus(); } catch (e) {} }
+  }
+
+  var letterOpenedFlag = false;
+  function revealLetterLines() {
+    if (!letterLines || !letterLines.length) return;
+    for (var i = 0; i < letterLines.length; i++) {
+      (function (node, idx) {
+        setTimeout(function () { node.classList.add('revealed'); },
+          reduceMotion ? 0 : idx * 320 + 200);
+      })(letterLines[i], i);
+    }
+    if (letterSign) {
+      setTimeout(function () { letterSign.classList.add('revealed'); },
+        reduceMotion ? 0 : letterLines.length * 320 + 400);
+    }
+    setTimeout(markLetterDone, reduceMotion ? 0 : letterLines.length * 320 + 1300);
+  }
+  function markLetterDone() { if (letterCard) letterCard.classList.add('all-shown'); }
+  function openLetter() {
+    if (letterOpenedFlag || !letterCard) return;
+    letterOpenedFlag = true;
+    letterCard.classList.add('opened');
+    if (letterOpenBtn) { letterOpenBtn.disabled = true; letterOpenBtn.setAttribute('aria-hidden', 'true'); }
+    revealLetterLines();
+  }
+  function skipLetterReveal() {
+    if (!letterLines || !letterLines.length) return;
+    for (var i = 0; i < letterLines.length; i++) letterLines[i].classList.add('revealed');
+    if (letterSign) letterSign.classList.add('revealed');
+    markLetterDone();
+  }
+
+  var miniEnvs = [];
+  var openedSet = {};
+  var currentIdx = -1;
+
+  function buildMiniEnvs() {
+    if (!miniEnvsEl) return;
+
+    for (var i = 0; i < HEART_NOTES.length; i++) {
+      (function (idx) {
+        var btn = document.createElement('button');
+        btn.className = 'mini-env';
+        btn.type = 'button';
+        btn.setAttribute('data-idx', String(idx));
+        btn.setAttribute('aria-label', 'Mở phong bì số ' + (idx + 1));
+
+        var body = document.createElement('span');
+        body.className = 'mini-env-body';
+        var flap = document.createElement('span');
+        flap.className = 'mini-env-flap';
+        var num = document.createElement('span');
+        num.className = 'mini-env-num';
+        num.textContent = '0' + (idx + 1);
+
+        btn.appendChild(body);
+        btn.appendChild(flap);
+        btn.appendChild(num);
+        miniEnvsEl.appendChild(btn);
+        miniEnvs.push(btn);
+      })(i);
+    }
+
+    miniEnvsEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.mini-env');
+      if (!btn) return;
+      var idx = parseInt(btn.getAttribute('data-idx'), 10);
+      if (!isFinite(idx) || idx < 0 || idx >= HEART_NOTES.length) return;
+      handleMiniEnvClick(idx);
+    });
+
+    updateHeartCount();
+  }
+
+  function updateHeartCount() {
+    if (!heartCount) return;
+    var opened = 0;
+    for (var i = 0; i < HEART_NOTES.length; i++) if (openedSet[i]) opened++;
+    if (opened === 0) {
+      heartCount.textContent = 'Chưa mở lá nào';
+    } else if (opened === HEART_NOTES.length) {
+      heartCount.textContent = 'Đã mở hết ' + opened + '/' + HEART_NOTES.length + ' lá';
+    } else {
+      heartCount.textContent = 'Đã mở ' + opened + '/' + HEART_NOTES.length + ' lá';
+    }
+  }
+
+  function handleMiniEnvClick(idx) {
+    if (!heartMsg) return;
+    openedSet[idx] = true;
+    if (miniEnvs[idx]) miniEnvs[idx].classList.add('opened');
+    currentIdx = idx;
+
+    for (var i = 0; i < miniEnvs.length; i++) {
+      miniEnvs[i].classList.toggle('viewing', i === idx);
+    }
+
+    heartMsg.classList.add('fading');
+    setTimeout(function () {
+      heartMsg.classList.remove('empty');
+      heartMsg.textContent = HEART_NOTES[idx];
+      heartMsg.classList.add('showing');
+      heartMsg.classList.remove('fading');
+    }, reduceMotion ? 0 : 180);
+
+    updateHeartCount();
+  }
+
+  /* ---------- Hoa tulip: dựng SVG + hiệu ứng nở ---------- */
+  var FLOWER_SVG = "<svg class=\"tulip\" viewBox=\"0 0 160 260\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\" focusable=\"false\"><g class=\"lf lf-l\"><path d=\"M79 242 C54 238 30 210 27 162 C26 150 28 143 31 136 C40 176 62 210 79 228 Z\" fill=\"url(#tg-leafL)\"/><path d=\"M79 234 C56 216 38 186 31 142\" stroke=\"#3F6A52\" stroke-opacity=\".35\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/></g><g class=\"lf lf-r\"><path d=\"M81 242 C106 238 130 210 133 162 C134 150 132 143 129 136 C120 176 98 210 81 228 Z\" fill=\"url(#tg-leafR)\"/><path d=\"M81 234 C104 216 122 186 129 142\" stroke=\"#3F6A52\" stroke-opacity=\".35\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/></g><path d=\"M77.4 134 C77 168 79.6 206 77.6 246 L82.4 246 C84.4 206 81 168 82.6 134 Z\" fill=\"url(#tg-stem)\"/><g class=\"pt pt-BL\"><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-back)\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-shade)\"/><path d=\"M80 128 C79 102 79 72 80 48\" stroke=\"#fff\" stroke-opacity=\".30\" stroke-width=\"1.1\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M71 126 C62 106 62 86 68 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M89 126 C98 106 98 86 92 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M53 88 C55 66 66 49 80 37\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"1.3\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" stroke=\"#8E2B45\" stroke-opacity=\".16\" stroke-width=\".7\" fill=\"none\"/></g><g class=\"pt pt-BR\"><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-back)\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-shade)\"/><path d=\"M80 128 C79 102 79 72 80 48\" stroke=\"#fff\" stroke-opacity=\".30\" stroke-width=\"1.1\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M71 126 C62 106 62 86 68 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M89 126 C98 106 98 86 92 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M107 88 C105 66 94 49 80 37\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"1.3\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" stroke=\"#8E2B45\" stroke-opacity=\".16\" stroke-width=\".7\" fill=\"none\"/></g><g class=\"pt pt-BC\"><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-center)\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-shade)\"/><path d=\"M80 128 C79 102 79 72 80 48\" stroke=\"#fff\" stroke-opacity=\".30\" stroke-width=\"1.1\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M71 126 C62 106 62 86 68 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M89 126 C98 106 98 86 92 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M107 88 C105 66 94 49 80 37\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"1.3\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" stroke=\"#8E2B45\" stroke-opacity=\".16\" stroke-width=\".7\" fill=\"none\"/></g><g class=\"stamens\"><path d=\"M80 132 C80.3 108 79.7 78 80 56\" stroke=\"#DCE8BE\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><circle cx=\"80\" cy=\"52.5\" r=\"3.4\" fill=\"#EEF3D2\"/><path d=\"M80 132 C77 110 74 84 73 63\" stroke=\"#F1DFA8\" stroke-width=\"1.15\" stroke-linecap=\"round\"/><path d=\"M80 132 C83 110 86 84 87 63\" stroke=\"#F1DFA8\" stroke-width=\"1.15\" stroke-linecap=\"round\"/><path d=\"M80 132 C73 112 67 84 66 56\" stroke=\"#F1DFA8\" stroke-width=\"1.15\" stroke-linecap=\"round\"/><path d=\"M80 132 C87 112 93 84 94 56\" stroke=\"#F1DFA8\" stroke-width=\"1.15\" stroke-linecap=\"round\"/><ellipse cx=\"73\" cy=\"59.5\" rx=\"2.2\" ry=\"5\" transform=\"rotate(-4 73 59.5)\" fill=\"#4A2038\"/><circle cx=\"73\" cy=\"57.3\" r=\"1.1\" fill=\"#F2C14E\"/><ellipse cx=\"87\" cy=\"59.5\" rx=\"2.2\" ry=\"5\" transform=\"rotate(4 87 59.5)\" fill=\"#4A2038\"/><circle cx=\"87\" cy=\"57.3\" r=\"1.1\" fill=\"#F2C14E\"/><ellipse cx=\"66\" cy=\"52.5\" rx=\"2.2\" ry=\"5\" transform=\"rotate(-18 66 52.5)\" fill=\"#4A2038\"/><circle cx=\"66\" cy=\"50.3\" r=\"1.1\" fill=\"#F2C14E\"/><ellipse cx=\"94\" cy=\"52.5\" rx=\"2.2\" ry=\"5\" transform=\"rotate(18 94 52.5)\" fill=\"#4A2038\"/><circle cx=\"94\" cy=\"50.3\" r=\"1.1\" fill=\"#F2C14E\"/></g><g class=\"pt pt-FL\"><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-front)\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-shade)\"/><path d=\"M80 128 C79 102 79 72 80 48\" stroke=\"#fff\" stroke-opacity=\".30\" stroke-width=\"1.1\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M71 126 C62 106 62 86 68 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M89 126 C98 106 98 86 92 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M53 88 C55 66 66 49 80 37\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"1.3\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" stroke=\"#8E2B45\" stroke-opacity=\".16\" stroke-width=\".7\" fill=\"none\"/></g><g class=\"pt pt-FR\"><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-front2)\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" fill=\"url(#tg-shade)\"/><path d=\"M80 128 C79 102 79 72 80 48\" stroke=\"#fff\" stroke-opacity=\".30\" stroke-width=\"1.1\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M71 126 C62 106 62 86 68 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M89 126 C98 106 98 86 92 64\" stroke=\"#fff\" stroke-opacity=\".18\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M107 88 C105 66 94 49 80 37\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"1.3\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M80 136 C58 135 49 108 52 82 C54 62 66 46 80 34 C94 46 106 62 108 82 C111 108 102 135 80 136 Z\" stroke=\"#8E2B45\" stroke-opacity=\".16\" stroke-width=\".7\" fill=\"none\"/></g><ellipse cx=\"80\" cy=\"138.5\" rx=\"6\" ry=\"4.4\" fill=\"#7DA68A\"/></svg>";
+
+  function buildTulips() {
+    var arts = document.querySelectorAll('[data-tulip]');
+    for (var i = 0; i < arts.length; i++) arts[i].innerHTML = FLOWER_SVG;
+
+    var holders = document.querySelectorAll('.flower-sparks');
+    for (var h = 0; h < holders.length; h++) {
+      for (var k = 0; k < 12; k++) {
+        var sp = document.createElement('span');
+        sp.className = 'spark';
+        var ang = -Math.PI / 2 + (Math.random() - 0.5) * 2.4;
+        var dist = 46 + Math.random() * 62;
+        sp.style.setProperty('--dx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+        sp.style.setProperty('--dy', (Math.sin(ang) * dist - 10).toFixed(1) + 'px');
+        sp.style.setProperty('--s', (3 + Math.random() * 4).toFixed(1) + 'px');
+        sp.style.setProperty('--dl', (1.5 + Math.random() * 1.1).toFixed(2) + 's');
+        holders[h].appendChild(sp);
+      }
+    }
+  }
+
+  function openFlower(stage, withBurst) {
+    if (!stage || stage.classList.contains('is-open')) return;
+    stage.classList.add('is-open');
+    if (withBurst && !reduceMotion) {
+      setTimeout(function () {
+        var r = stage.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        spawnBurst(r.left + r.width / 2, r.top + r.height * 0.3, 14);
+      }, 1300);
+    }
+  }
+
+  var flowerBusy = false;
+  function replayFlower(stage) {
+    if (!stage || flowerBusy) return;
+    flowerBusy = true;
+    stage.classList.remove('is-open');
+    setTimeout(function () { openFlower(stage, true); flowerBusy = false; }, reduceMotion ? 30 : 1100);
+  }
+
+  function scheduleHeroBloom() {
+    setTimeout(function () { openFlower(heroFlower, true); }, reduceMotion ? 0 : 700);
+  }
+
+  function initFlowers() {
+    if (heroFlower) heroFlower.addEventListener('click', function () { replayFlower(heroFlower); });
+    if (finalFlower) {
+      finalFlower.addEventListener('click', function () { replayFlower(finalFlower); });
+      if (!('IntersectionObserver' in window)) { openFlower(finalFlower, true); return; }
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) { openFlower(finalFlower, true); io.disconnect(); break; }
+        }
+      }, { threshold: 0.6 });
+      io.observe(finalFlower);
+    }
+  }
+
+  /* Envelope particles */
+  var ENV_PARTICLE_COLORS = ['#F8CFD9', '#F3B1C2', '#EC93A9', '#FBE3E9', '#F4B9A8', '#FADDE5'];
+  function buildEnvParticles() {
+    if (!envParticles || reduceMotion) return;
+    var n = 18;
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span');
+      var ang = (Math.PI * 2 / n) * i + (Math.random() - 0.5) * 0.4;
+      var dist = 60 + Math.random() * 70;
+      s.style.setProperty('--x', (Math.cos(ang) * dist).toFixed(1) + 'px');
+      s.style.setProperty('--y', (Math.sin(ang) * dist - 30).toFixed(1) + 'px');
+      s.style.setProperty('--r', (Math.random() * 360).toFixed(0) + 'deg');
+      s.style.setProperty('--d', (Math.random() * 0.5).toFixed(2) + 's');
+      s.style.setProperty('--c', ENV_PARTICLE_COLORS[i % ENV_PARTICLE_COLORS.length]);
+      s.style.width = s.style.height = (8 + Math.random() * 6).toFixed(0) + 'px';
+      envParticles.appendChild(s);
+    }
+  }
+
+  function onRevealed(el) { if (el === counterCard) animateCount(); }
+  function initReveal() {
+    var nodes = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < nodes.length; i++) { nodes[i].classList.add('in'); onRevealed(nodes[i]); }
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        var e = entries[i];
+        if (e.isIntersecting) { e.target.classList.add('in'); onRevealed(e.target); io.unobserve(e.target); }
+      }
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    for (var j = 0; j < nodes.length; j++) io.observe(nodes[j]);
+  }
+
+  function updateProgress() {
+    if (!progressBar) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var p = max > 0 ? (window.pageYOffset || doc.scrollTop) / max * 100 : 0;
+    if (p < 0) p = 0; if (p > 100) p = 100;
+    progressBar.style.width = p + '%';
+  }
+
+  var COLORS = [
+    '#F8CFD9',
+    '#F3B1C2',
+    '#EC93A9',
+    '#FBE3E9',
+    '#F4B9A8',
+    '#FADDE5'
+  ];
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0;
+  var backLayer = null, frontLayer = null;
+  var backItems = [];
+  var frontItems = [];
+  var burst = [];
+  var ambientOn = false;
+  var rafId = null;
+  var lastT = 0;
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function makeLayer(z, cls) {
+    var c = document.createElement('canvas');
+    c.className = 'petal-layer' + (cls ? ' ' + cls : '');
+    c.style.zIndex = z;
+    c.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(c);
+    return { c: c, ctx: c.getContext('2d') };
+  }
+
+  function resizeLayers() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    var ls = [backLayer, frontLayer];
+    for (var i = 0; i < ls.length; i++) {
+      var l = ls[i]; if (!l || !l.ctx) continue;
+      l.c.width = Math.round(W * dpr); l.c.height = Math.round(H * dpr);
+      l.c.style.width = W + 'px'; l.c.style.height = H + 'px';
+      l.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+  }
+
+  function newPetal(initial, isFar) {
+    var isFlower = Math.random() < (isFar ? 0.35 : 0.22);
+    return {
+      type: isFlower ? 'flower' : 'petal',
+      x: rand(0, W),
+      y: initial ? rand(-H * 0.15, H) : rand(-60, -20),
+      s: isFar ? rand(4, 7) : rand(9, 15),
+      vy: isFar ? rand(0.16, 0.32) : rand(0.3, 0.6),
+      sway1: rand(0.4, 1.0),
+      sway2: rand(0.15, 0.4),
+      ph1: rand(0, 6.28),
+      ph2: rand(0, 6.28),
+      rot: rand(0, 6.28),
+      vr: (isFar ? rand(-0.006, 0.006) : rand(-0.018, 0.018)),
+      flip: rand(0, 6.28),
+      vf: (isFar ? rand(0.008, 0.02) : rand(0.02, 0.05)),
+      col: pick(COLORS),
+      a: isFar ? rand(0.3, 0.5) : rand(0.5, 0.8)
+    };
+  }
+
+  function drawPetalShape(ctx, p) {
+    var s = p.s;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.scale(Math.max(0.3, Math.abs(Math.cos(p.flip))), 1);
+    ctx.globalAlpha = p.a;
+    ctx.fillStyle = p.col;
+    ctx.beginPath();
+    ctx.moveTo(0, -s);
+    ctx.bezierCurveTo(s * 0.9, -s * 0.6, s * 0.8, s * 0.5, 0, s);
+    ctx.bezierCurveTo(-s * 0.8, s * 0.5, -s * 0.9, -s * 0.6, 0, -s);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawFlowerShape(ctx, p) {
+    var s = p.s;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.scale(Math.max(0.3, Math.abs(Math.cos(p.flip))), 1);
+    ctx.globalAlpha = p.a;
+    ctx.fillStyle = p.col;
+    for (var i = 0; i < 5; i++) {
+      var a = (Math.PI * 2 / 5) * i;
+      ctx.beginPath();
+      ctx.ellipse(
+        Math.cos(a) * s * 0.45,
+        Math.sin(a) * s * 0.45,
+        s * 0.42, s * 0.32,
+        a, 0, Math.PI * 2
+      );
+      ctx.fill();
+    }
+    ctx.globalAlpha = p.a * 0.9;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.beginPath();
+    ctx.arc(0, 0, s * 0.22, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawItem(ctx, p) {
+    if (p.type === 'flower') drawFlowerShape(ctx, p);
+    else drawPetalShape(ctx, p);
+  }
+
+  function frame(t) {
+    rafId = null;
+    if (!backLayer || !frontLayer) return;
+    var dt = Math.min(2.5, (t - lastT) / 16.67);
+    if (!(dt > 0)) dt = 1;
+    lastT = t;
+
+    backLayer.ctx.clearRect(0, 0, W, H);
+    frontLayer.ctx.clearRect(0, 0, W, H);
+
+    var i, p;
+
+    if (ambientOn) {
+      for (i = 0; i < backItems.length; i++) {
+        p = backItems[i];
+        p.y += p.vy * dt;
+        p.ph1 += 0.008 * dt;
+        p.ph2 += 0.018 * dt;
+        p.x += (Math.sin(p.ph1) * p.sway1 + Math.sin(p.ph2) * p.sway2) * 0.45 * dt;
+        p.rot += p.vr * dt;
+        p.flip += p.vf * dt;
+        if (p.y > H + 30 || p.x < -40 || p.x > W + 40) {
+          backItems[i] = newPetal(false, true); p = backItems[i];
+        }
+        drawItem(backLayer.ctx, p);
+      }
+      for (i = 0; i < frontItems.length; i++) {
+        p = frontItems[i];
+        p.y += p.vy * dt;
+        p.ph1 += 0.012 * dt;
+        p.ph2 += 0.024 * dt;
+        p.x += (Math.sin(p.ph1) * p.sway1 + Math.sin(p.ph2) * p.sway2) * 0.55 * dt;
+        p.rot += p.vr * dt;
+        p.flip += p.vf * dt;
+        if (p.y > H + 40 || p.x < -50 || p.x > W + 50) {
+          frontItems[i] = newPetal(false, false); p = frontItems[i];
+        }
+        drawItem(frontLayer.ctx, p);
+      }
+    }
+
+    for (i = burst.length - 1; i >= 0; i--) {
+      p = burst[i];
+      if (p.delay > 0) { p.delay -= dt; continue; }
+      p.vx *= Math.pow(p.drag, dt);
+      p.vy += p.g * dt;
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.rot += p.vr * dt;
+      p.flip += p.vf * dt;
+      p.life += dt;
+      var fadeStart = p.max * 0.65;
+      p.a = p.life > fadeStart ? Math.max(0, 1 - (p.life - fadeStart) / (p.max - fadeStart)) : 1;
+      p.a *= 0.95;
+      if (p.life >= p.max || p.y > H + 40) { burst.splice(i, 1); continue; }
+      drawItem(frontLayer.ctx, p);
+    }
+
+    if (ambientOn || burst.length) rafId = requestAnimationFrame(frame);
+  }
+
+  function ensureLoop() {
+    if (rafId || document.hidden || !backLayer) return;
+    if (!ambientOn && !burst.length) return;
+    lastT = performance.now();
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function startAmbient() {
+    if (reduceMotion || ambientOn || !backLayer) return;
+    backItems = [];
+    frontItems = [];
+    var nBack = W < 480 ? 12 : 18;
+    var nFront = W < 480 ? 6 : 9;
+    for (var i = 0; i < nBack; i++) backItems.push(newPetal(true, true));
+    for (var j = 0; j < nFront; j++) frontItems.push(newPetal(true, false));
+    ambientOn = true;
+    ensureLoop();
+  }
+
+  function spawnBurst(x, y, n) {
+    if (reduceMotion || !frontLayer) return;
+    if (burst.length > 180) return;
+    for (var i = 0; i < n; i++) {
+      var ang = rand(-Math.PI, 0);
+      var sp = rand(2.5, 7.5);
+      var isFlower = Math.random() < 0.15;
+      burst.push({
+        type: isFlower ? 'flower' : 'petal',
+        x: x, y: y,
+        vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp - 1,
+        g: 0.14, drag: 0.985,
+        s: rand(8, 14), rot: rand(0, 6.28), vr: rand(-0.08, 0.08),
+        flip: rand(0, 6.28), vf: rand(0.05, 0.14),
+        col: pick(COLORS), a: 1, life: 0, max: rand(90, 150), delay: 0
+      });
+    }
+    ensureLoop();
+  }
+
+  function spawnRain(n) {
+    if (reduceMotion || !frontLayer) return;
+    if (burst.length > 240) return;
+    for (var i = 0; i < n; i++) {
+      var isFlower = Math.random() < 0.2;
+      burst.push({
+        type: isFlower ? 'flower' : 'petal',
+        x: rand(0, W), y: rand(-40, -8),
+        vx: rand(-0.7, 0.7), vy: rand(1.4, 3.2),
+        g: 0.012, drag: 0.998,
+        s: rand(8, 14), rot: rand(0, 6.28), vr: rand(-0.06, 0.06),
+        flip: rand(0, 6.28), vf: rand(0.03, 0.09),
+        col: pick(COLORS), a: 1, life: 0, max: rand(280, 440),
+        delay: rand(0, 90)
+      });
+    }
+    ensureLoop();
+  }
+
+  function initPetals() {
+    backLayer  = makeLayer(0, 'back');
+    frontLayer = makeLayer(40);
+    resizeLayers();
+    window.addEventListener('resize', resizeLayers);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) ensureLoop(); });
+  }
+
+  var musicOk = true;
+  var playing = false;
+  var hasStarted = false;
+  var fadeTimer = null;
+  var TARGET_VOL = 0.20;
+  var FADE_MS = 2600;
+  var FADE_SHORT = 400;
+
+  function safeSetVolume(v) {
+    if (v < 0) v = 0; if (v > 1) v = 1;
+    try { bgm.volume = v; } catch (e) {}
+  }
+  function fadeTo(target, duration) {
+    if (fadeTimer) { clearInterval(fadeTimer); fadeTimer = null; }
+    var startVol = 0;
+    try { startVol = bgm.volume; } catch (e) { startVol = 0; }
+    var steps = Math.max(1, Math.round(duration / 50));
+    var i = 0;
+    fadeTimer = setInterval(function () {
+      i++;
+      var v = startVol + (target - startVol) * (i / steps);
+      safeSetVolume(v);
+      if (i >= steps) { clearInterval(fadeTimer); fadeTimer = null; safeSetVolume(target); }
+    }, 50);
+  }
+  function updateMusicUI() {
+    if (!musicUI || !musicBtn || !musicState) return;
+    if (!musicOk) {
+      musicUI.classList.add('unavailable');
+      musicState.textContent = 'Tắt';
+      musicBtn.classList.remove('on');
+      musicBtn.setAttribute('aria-pressed', 'false');
+      musicBtn.setAttribute('aria-label', 'Nhạc nền không khả dụng');
+      return;
+    }
+    musicUI.classList.remove('unavailable');
+    musicBtn.classList.toggle('on', playing);
+    musicState.textContent = playing ? 'Bật' : 'Tắt';
+    musicBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    musicBtn.setAttribute('aria-label', playing ? 'Tắt nhạc nền' : 'Bật nhạc nền');
+  }
+  function startMusic() {
+    if (!musicOk || !bgm) return;
+    var promise;
+    try { promise = bgm.play(); }
+    catch (e) { playing = false; updateMusicUI(); return; }
+    function onOk() {
+      playing = true;
+      if (!hasStarted) { hasStarted = true; safeSetVolume(0); fadeTo(TARGET_VOL, FADE_MS); }
+      else fadeTo(TARGET_VOL, FADE_SHORT);
+      updateMusicUI();
+    }
+    function onFail(err) {
+      playing = false;
+      if (err && err.name === 'NotSupportedError') musicOk = false;
+      updateMusicUI();
+    }
+    if (promise && typeof promise.then === 'function') promise.then(onOk).catch(onFail);
+    else onOk();
+  }
+  function stopMusic() {
+    if (!musicOk || !bgm) return;
+    playing = false; updateMusicUI();
+    fadeTo(0, FADE_SHORT);
+    setTimeout(function () { if (!playing) { try { bgm.pause(); } catch (e) {} } }, FADE_SHORT + 40);
+  }
+  function toggleMusic() { if (!musicOk) return; if (playing) stopMusic(); else startMusic(); }
+  function initAudio() {
+    if (!bgm) return;
+    safeSetVolume(0);
+    bgm.addEventListener('error', function () {
+      musicOk = false; playing = false;
+      if (fadeTimer) { clearInterval(fadeTimer); fadeTimer = null; }
+      updateMusicUI();
+    });
+    if (bgm.error) musicOk = false;
+    setTimeout(function () {
+      if (bgm.error || bgm.networkState === 3) { musicOk = false; playing = false; updateMusicUI(); }
+    }, 1500);
+    if (musicBtn) musicBtn.addEventListener('click', toggleMusic);
+    updateMusicUI();
+  }
+
+  function init() {
+    initPetals();
+    updateCounter();
+    renderLane();
+    tickClock();
+    initReveal();
+    initAudio();
+    buildMiniEnvs();
+    buildEnvParticles();
+    buildTulips();
+    initFlowers();
+
+    if (envOpenBtn) envOpenBtn.addEventListener('click', openEnvelope);
+    if (envSkipBtn) envSkipBtn.addEventListener('click', skipEnvelope);
+
+    if (counterCard) counterCard.addEventListener('click', function (e) { spawnBurst(e.clientX, e.clientY, 22); });
+    if (rainBtn) rainBtn.addEventListener('click', function () { spawnRain(52); });
+    if (replayBtn) replayBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+    if (letterOpenBtn) letterOpenBtn.addEventListener('click', openLetter);
+    if (letterSkipBtn) letterSkipBtn.addEventListener('click', skipLetterReveal);
+
+    if (laneEl) laneEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.lane-btn');
+      if (!btn) return;
+      var id = btn.getAttribute('data-id');
+      for (var i = 0; i < MILESTONES.length; i++) {
+        if (MILESTONES[i].id === id) { openModal(MILESTONES[i]); return; }
+      }
+    });
+
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        if (e.target.hasAttribute('data-close') || e.target.closest('[data-close]')) closeModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      });
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    setInterval(tickClock, 1000);
+    updateProgress();
+
+    if (introSeen) {
+      envelopeOpening = true;
+      if (envOverlay) envOverlay.classList.add('hidden');
+      document.documentElement.classList.remove('locked');
+      document.body.classList.remove('locked');
+      if (main) { main.classList.add('visible'); main.setAttribute('aria-hidden', 'false'); }
+      if (musicUI) musicUI.classList.add('show');
+      if (progress) progress.classList.add('show');
+      startAmbient();
+      scheduleHeroBloom();
+    }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+})();
+</script>
+</body>
+</html>
